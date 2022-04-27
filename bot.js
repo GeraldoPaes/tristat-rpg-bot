@@ -6,9 +6,20 @@ const { rollDice, replyBuilder, extractTokens } = require('./dice');
 
 client.login(process.env.TOKEN);
 
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.username}.`);
-});
+let bot = {
+    client,
+    prefix: "!",
+    owners: ["191338224466001922"]
+}
+
+client.commands = new Discord.Collection();
+client.events = new Discord.Collection();
+
+client.loadEvents = (bot, reload) => require("./handlers/events")(bot, reload);
+
+client.loadEvents(bot, false);
+
+module.exports = bot;
 
 client.on('messageCreate', (message) => {
     const regexDice = /^([1-9]?\d?)d([1-9]\d?)(?: *)?(?:(\+|-)(?: *)?([1-9]\d?))?$/i;
