@@ -22,7 +22,7 @@ module.exports = {
             command = client.commands.get("roll");
         }
 
-        if (!command) return;
+        if (!command || cmdstr === "roll") return;
 
         let member = message.member;
 
