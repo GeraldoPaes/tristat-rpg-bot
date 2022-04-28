@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client({ intents: 32767 });
 require("dotenv").config();
 
-const { rollDice, replyBuilder, extractTokens } = require('./dice');
+//const { rollDice, replyBuilder, extractTokens } = require('./dice');
 
 client.login(process.env.TOKEN);
 
@@ -16,11 +16,14 @@ client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 
 client.loadEvents = (bot, reload) => require("./handlers/events")(bot, reload);
+client.loadCommands = (bot, reload) => require("./handlers/commands")(bot, reload);
 
 client.loadEvents(bot, false);
+client.loadCommands(bot, false);
 
 module.exports = bot;
 
+/*
 client.on('messageCreate', (message) => {
     const regexDice = /^([1-9]?\d?)d([1-9]\d?)(?: *)?(?:(\+|-)(?: *)?([1-9]\d?))?$/i;
 
@@ -42,4 +45,5 @@ client.on('messageCreate', (message) => {
 
     return
 });
+*/
   

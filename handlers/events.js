@@ -41,8 +41,8 @@ function initEvents (bot) {
     const {client} = bot;
 
     client.events.forEach((e) => {
-        client.on(e.name, () => {
-            triggerEventHandler(bot, e.name);
+        client.on(e.name, (...args) => {
+            triggerEventHandler(bot, e.name, ...args);
         })
     })
 }
